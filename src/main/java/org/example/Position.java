@@ -6,9 +6,13 @@ public class Position {
 
     public Position(int x, int y) {
         if( x < 0 || y < 0) {
-            throw new IllegalArgumentException("Neither x nor y can be negative");
+            throw new IllegalArgumentException("Neither x: "+x+" nor y: "+y+" can be negative");
         }
         this.x = x;
         this.y = y;
+    }
+
+    public boolean isAtTheEndOfTheRow(BoardSize boardSize) {
+        return x == boardSize.getWidth() - 1;
     }
 }

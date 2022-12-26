@@ -10,8 +10,15 @@ public class AliveCell extends Cell{
         super(position);
     }
 
-    public AliveCell(Cell cell) {
+    public AliveCell(DeadCell cell) {
         super(cell);
+    }
+
+    @Override
+    public AliveCell deepCopy() {
+        AliveCell aliveCell = new AliveCell(this.getPosition());
+        aliveCell.setNeighboursCount(this.getNeighboursCount());
+        return aliveCell;
     }
 
     public boolean isUnderpopulated() {
@@ -28,6 +35,11 @@ public class AliveCell extends Cell{
             return new DeadCell(this);
         }
         return this;
+    }
+
+    @Override
+    public void show() {
+        System.out.print("*");
     }
 
     private boolean shouldDie() {

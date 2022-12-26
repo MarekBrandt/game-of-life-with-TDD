@@ -17,7 +17,15 @@ abstract public class Cell {
         this.neighboursCount = cell.getNeighboursCount();
     }
 
-    abstract Cell updateState();
+    public abstract Cell deepCopy();
+
+    abstract public Cell updateState();
+
+    abstract public void show();
+
+    public boolean isLastInRow(BoardSize boardSize) {
+        return position.isAtTheEndOfTheRow(boardSize);
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
