@@ -30,4 +30,27 @@ public class BoardSizeTest {
         assertEquals(10, numberOfTiles);
     }
 
+    @Test
+    public void shouldCalculateLastRowIndex() {
+        //given
+        BoardSize boardSize = new BoardSize(2, 3);
+
+        //when
+        int lastRowIndex = boardSize.getLastRowIndex();
+
+        //then
+        assertEquals(2, lastRowIndex);
+    }
+
+    @Test
+    public void shouldCalculateLastColumnIndex() {
+        //given
+        BoardSize boardSize = new BoardSize(2, 3);
+
+        //when
+        int lastColumnIndex = boardSize.getLastColumnIndex();
+
+        //then
+        assertEquals(1, lastColumnIndex);
+    }
 }

@@ -1,10 +1,10 @@
 package org.example;
 
-import java.util.List;
+import java.util.Map;
 
 public class Board {
     private BoardSize boardSize;
-    private List<Cell> cells;
+    private Map<Position, Cell> cells;
 
     public Board(BoardSize boardSize) {
         this.boardSize = boardSize;
@@ -12,25 +12,22 @@ public class Board {
         cells = boardInitializer.initialize(boardSize);
     }
 
-//    public void update() {
-//
-//    }
-
-//    public Board(Board board) {
-//        this.boardSize = board.boardSize;
-//        this.cells = deepCopyCells(board.cells);
-//    }
-//
-//    private List<Cell> deepCopyCells(List<Cell> cells) {
-//        ArrayList<Cell> newCells = new ArrayList<>();
-//        cells.stream().map(cell -> {
-//            newCells.add()
-//        })
-//    }
-
     public void show() {
-        for(Cell cell : cells) {
-            cell.show();
-            }
+        Position position = Position.FIRST;
+        while (position.hasNext(boardSize)){
+            showCellOnPosition(position);
+            position = position.nextPosition(boardSize);
+        }
+        showCellOnPosition(position);
     }
+
+    private void showCellOnPosition(Position position) {
+        Cell cell = cells.get(position);
+        cell.show();
+        if (position.isInTheLastColumn(boardSize)) {
+            System.out.println();
+        }
+    }
+
+
 }

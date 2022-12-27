@@ -9,8 +9,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 
 import static org.junit.Assert.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class PositionTest {
     @ParameterizedTest
@@ -35,31 +34,77 @@ public class PositionTest {
     }
 
     @Test
-    public void shouldReturnTrueIfEndOfTheRow() {
+    public void shouldReturnTrueIfInLastColumn() {
         //given
         BoardSize boardSize = new BoardSize(2, 2);
         Position position = new Position(1, 1);
 
         //when
-        boolean endOfTheRow = position.isAtTheEndOfTheRow(boardSize);
+        boolean inTheLastColumn = position.isInTheLastColumn(boardSize);
 
         //then
-        assertTrue(endOfTheRow);
+        assertTrue(inTheLastColumn);
     }
 
     @Test
-    public void shouldReturnFalseIfNotEndOfTheRow() {
+    public void shouldReturnFalseIfNotInLastColumn() {
         //given
         BoardSize boardSize = new BoardSize(2, 2);
         Position position = new Position(0, 1);
 
         //when
-        boolean endOfTheRow = position.isAtTheEndOfTheRow(boardSize);
+        boolean inTheLastColumn = position.isInTheLastColumn(boardSize);
 
         //then
-        assertFalse(endOfTheRow);
+        assertFalse(inTheLastColumn);
     }
 
+    @Test
+    public void shouldReturnTrueIfInLastRow() {
+        //given
+        BoardSize boardSize = new BoardSize(2, 2);
+        Position position = new Position(1, 1);
+
+        //when
+        boolean theLastRow = position.isInTheLastRow(boardSize);
+
+        //then
+        assertTrue(theLastRow);
+    }
+
+    @Test
+    public void shouldReturnFalseIfNotInLastRow() {
+        //given
+        BoardSize boardSize = new BoardSize(2, 2);
+        Position position = new Position(0, 0);
+
+        //when
+        boolean inTheLastRow = position.isInTheLastRow(boardSize);
+
+        //then
+        assertFalse(inTheLastRow);
+    }
+
+    //next pos test cases: normal, last column, last cell
+    @ParameterizedTest
+    @MethodSource("nextPositionTestCases")
+    public void shouldReturnValidNextPosition(Position current, Position expected, BoardSize boardSize) {
+        //when
+        Position nextPosition = current.nextPosition(boardSize);
+
+        //then
+        assertEquals(expected, nextPosition);
+    }
+
+
+    private static Stream<Arguments> nextPositionTestCases() {
+        BoardSize boardSize = new BoardSize(3, 3);
+        return Stream.of(
+                Arguments.of(new Position(1,1), new Position(2,1), boardSize),
+                Arguments.of(new Position(2,1), new Position(1,2), boardSize),
+                Arguments.of(new Position(2,2), new Position(2,2), boardSize)
+        );
+    }
 
     private static Stream<Arguments> provideInvalidPositions() {
         return Stream.of(

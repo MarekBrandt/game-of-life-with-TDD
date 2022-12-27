@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -15,7 +16,7 @@ public class BoardInitializerTest {
         BoardInitializer boardInitializer = BoardInitializer.getInstance();
 
         //when
-        List<Cell> initialziedCells = boardInitializer.initialize(boardSize);
+        Map<Position, Cell> initialziedCells = boardInitializer.initialize(boardSize);
 
         //then
         assertEquals(6, initialziedCells.size());
@@ -28,10 +29,12 @@ public class BoardInitializerTest {
         BoardInitializer boardInitializer = BoardInitializer.getInstance();
 
         //when
-        List<Cell> initialziedCells = boardInitializer.initialize(boardSize);
+        Map<Position, Cell> initializedCells = boardInitializer.initialize(boardSize);
 
         //then
-        assertEquals(DeadCell.class, initialziedCells.get(0).getClass());
+        initializedCells.forEach(
+                (position, cell) -> assertEquals(DeadCell.class, cell.getClass())
+        );
     }
 
 }

@@ -1,7 +1,9 @@
 package org.example;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class BoardInitializer {
 
@@ -15,14 +17,14 @@ public class BoardInitializer {
         }
         return boardInitializer;
     }
-    public List<Cell> initialize(BoardSize boardSize) {
+    public Map<Position, Cell> initialize(BoardSize boardSize) {
 
-        List<Cell> cells = new ArrayList<>();
+        Map<Position, Cell> cells = new HashMap<>();
 
         for(int h = 0; h < boardSize.getHeight(); h++) {
             for(int w = 0; w < boardSize.getWidth(); w++) {
                 Position position = new Position(w, h);
-                cells.add(new DeadCell());
+                cells.put(position, new DeadCell());
             }
         }
         return cells;
