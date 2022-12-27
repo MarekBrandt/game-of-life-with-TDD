@@ -12,7 +12,7 @@ public class AliveCellTest {
     @ParameterizedTest
     @MethodSource("provideValidNeighboursCountToStayAlive")
     public void shouldStayAliveWhenInOptimalNeighbourhood(int neighboursCount) {
-        Cell cell = new AliveCell(new Position(3, 3));
+        Cell cell = new AliveCell();
         cell.setNeighboursCount(neighboursCount);
         Cell newCell = cell.updateState();
 
@@ -21,7 +21,7 @@ public class AliveCellTest {
 
     @Test
     public void shouldDieWhenUnderpopulated() {
-        Cell cell = new AliveCell(new Position(3,3));
+        Cell cell = new AliveCell();
         cell.setNeighboursCount(1);
         Cell newCell = cell.updateState();
 
@@ -30,7 +30,7 @@ public class AliveCellTest {
 
     @Test
     public void shouldDieWhenOverpopulated() {
-        Cell cell = new AliveCell(new Position(3,3));
+        Cell cell = new AliveCell();
         cell.setNeighboursCount(5);
         Cell newCell = cell.updateState();
 

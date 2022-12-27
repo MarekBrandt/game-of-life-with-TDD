@@ -4,19 +4,16 @@ public class DeadCell extends Cell {
 
     public static final int neighboursCountToGetRevived = 3;
 
-    public DeadCell(Position position) {
-        super(position);
-    }
+    public DeadCell() {super();}
 
     public DeadCell(AliveCell cell) {
         super(cell);
     }
 
-    @Override
-    public DeadCell deepCopy() {
-        DeadCell deadCell = new DeadCell(this.getPosition());
-        deadCell.setNeighboursCount(this.getNeighboursCount());
-        return deadCell;
+    private AliveCell revive() {
+        AliveCell aliveCell = new AliveCell();
+        aliveCell.setNeighboursCount(getNeighboursCount());
+        return aliveCell;
     }
 
     public boolean shouldGetRevived() {
@@ -26,7 +23,7 @@ public class DeadCell extends Cell {
     @Override
     public Cell updateState() {
         if(this.shouldGetRevived()) {
-            return new AliveCell(this);
+            return this.revive();
         }
         return this;
     }

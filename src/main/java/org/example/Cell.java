@@ -4,47 +4,33 @@ import java.util.Objects;
 
 abstract public class Cell {
 
-
-    protected final Position position;
     protected int neighboursCount;
 
-    public Cell(Position position) {
-        this.position = position;
-    }
+    public Cell() {}
 
-    public Cell(Cell cell) {
-        this.position = cell.getPosition();
+    protected Cell(Cell cell) {
         this.neighboursCount = cell.getNeighboursCount();
     }
-
-    public abstract Cell deepCopy();
 
     abstract public Cell updateState();
 
     abstract public void show();
 
-    public boolean isLastInRow(BoardSize boardSize) {
-        return position.isAtTheEndOfTheRow(boardSize);
-    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Cell cell = (Cell) o;
-        return neighboursCount == cell.neighboursCount && position.equals(cell.position);
+        return neighboursCount == cell.neighboursCount;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(position, neighboursCount);
+        return Objects.hash(neighboursCount);
     }
 
     public void setNeighboursCount(int neighboursCount) {
         this.neighboursCount = neighboursCount;
-    }
-
-    public Position getPosition() {
-        return position;
     }
 
     public int getNeighboursCount() {

@@ -12,6 +12,10 @@ public class Board {
         cells = boardInitializer.initialize(boardSize);
     }
 
+//    public void update() {
+//
+//    }
+
 //    public Board(Board board) {
 //        this.boardSize = board.boardSize;
 //        this.cells = deepCopyCells(board.cells);
@@ -27,9 +31,6 @@ public class Board {
     public void show() {
         for(Cell cell : cells) {
             cell.show();
-            if (cell.isLastInRow(boardSize)){
-                System.out.println();
             }
-        }
     }
 }

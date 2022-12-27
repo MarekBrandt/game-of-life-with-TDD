@@ -22,7 +22,7 @@ public class BoardInitializer {
         for(int h = 0; h < boardSize.getHeight(); h++) {
             for(int w = 0; w < boardSize.getWidth(); w++) {
                 Position position = new Position(w, h);
-                cells.add(new DeadCell(position));
+                cells.add(new DeadCell());
             }
         }
         return cells;

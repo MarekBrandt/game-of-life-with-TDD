@@ -6,19 +6,16 @@ public class AliveCell extends Cell{
 
     public static final List<Integer> neighboursCountToStayAlive = List.of(2,3);
 
-    public AliveCell(Position position) {
-        super(position);
-    }
+    public AliveCell() { super();}
 
-    public AliveCell(DeadCell cell) {
+    private AliveCell(DeadCell cell) {
         super(cell);
     }
 
-    @Override
-    public AliveCell deepCopy() {
-        AliveCell aliveCell = new AliveCell(this.getPosition());
-        aliveCell.setNeighboursCount(this.getNeighboursCount());
-        return aliveCell;
+    private DeadCell kill() {
+        DeadCell deadCell = new DeadCell();
+        deadCell.setNeighboursCount(getNeighboursCount());
+        return deadCell;
     }
 
     public boolean isUnderpopulated() {
@@ -32,7 +29,7 @@ public class AliveCell extends Cell{
     @Override
     public Cell updateState(){
         if(shouldDie()) {
-            return new DeadCell(this);
+            return this.kill();
         }
         return this;
     }
